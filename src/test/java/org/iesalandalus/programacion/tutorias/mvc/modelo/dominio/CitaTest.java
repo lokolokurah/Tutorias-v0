@@ -103,7 +103,7 @@ public class CitaTest {
 			cita = new Cita(ALUMNO, SESION, LocalTime.of(16, 51));
 			fail(HORA_INCORRECTA);
 		} catch (IllegalArgumentException e) {
-			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_HORA_FUERA_RANGO));
+			assertThat(MENSAJE_NO_CORRECTO, e.getMessage(), is(ERROR_HORA_NO_MULTIPLO));
 			assertThat(OBJETO_DEBERIA_SER_NULO, cita, is(nullValue()));
 		} catch (Exception e) {
 			fail(TIPO_NO_CORRECTO);
