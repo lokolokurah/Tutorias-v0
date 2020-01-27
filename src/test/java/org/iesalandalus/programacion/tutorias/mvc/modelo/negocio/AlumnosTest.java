@@ -10,6 +10,7 @@ import static org.junit.Assert.fail;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.tutorias.mvc.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.tutorias.mvc.negocio.Alumnos;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
