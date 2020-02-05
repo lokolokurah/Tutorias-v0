@@ -23,14 +23,14 @@ public class Sesiones {
 
 	public Sesion[] get()
 	{
-		return coleccionSesiones;
+		return copiaProfundaSesiones();
 	}
 	
 	//Clonación por copia profunda.
 	private Sesion[] copiaProfundaSesiones() 
 	{
-		Sesion[] copiaProfundaSesiones = new Sesion[tamano];
-		for (int i = 0; i < tamano; i++) 
+		Sesion[] copiaProfundaSesiones = new Sesion[capacidad];
+		for (int i = 0; !tamanoSuperado(i); i++) 
 		{
 			copiaProfundaSesiones[i] = new Sesion(coleccionSesiones[i]);
 		}
@@ -39,12 +39,13 @@ public class Sesiones {
 	
 	public Sesion[] get(Tutoria tutoria)
 	{
-		Sesion[] copiaTutoria = new Sesion[tamano];
-		for (int i = 0; i < tamano; i++)
+		int indice = 0;
+		Sesion[] copiaTutoria = new Sesion[capacidad];
+		for (int i = 0; !tamanoSuperado(i); i++)
 		{
 			if (coleccionSesiones[i].getTutoria().equals(tutoria)) 
 			{
-				copiaTutoria[i] = new Sesion(coleccionSesiones[i]);
+				copiaTutoria[indice++] = new Sesion(coleccionSesiones[i]);
 			}
 		}
 		return copiaTutoria;

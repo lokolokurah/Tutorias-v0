@@ -23,7 +23,7 @@ public class Tutorias {
 
 	public Tutoria[] get()
 	{
-		return coleccionTutorias;
+		return copiaProfundaTutorias();
 	}
 	
 	//Clonación por copia profunda.
@@ -31,7 +31,7 @@ public class Tutorias {
 	{
 		//Cambiado capacidad x tamaño ya que si no pueden copiarse valores nulos :)
 		Tutoria[] copiaProfundaTutorias = new Tutoria[tamano];
-		for (int i = 0; i < tamano; i++) 
+		for (int i = 0; !tamanoSuperado(i); i++) 
 		{
 			copiaProfundaTutorias[i] = new Tutoria(coleccionTutorias[i]);
 		}
@@ -40,12 +40,13 @@ public class Tutorias {
 	
 	public Tutoria[] get(Profesor profesor)
 	{
-		Tutoria[] copiaProfesor = new Tutoria[tamano];
-		for (int i = 0; i < tamano; i++)
+		int indice = 0;
+		Tutoria[] copiaProfesor = new Tutoria[capacidad];
+		for (int i = 0; !tamanoSuperado(i); i++)
 		{
 			if (coleccionTutorias[i].getProfesor().equals(profesor)) 
 			{
-				copiaProfesor[i] = new Tutoria(coleccionTutorias[i]);
+				copiaProfesor[indice++] = new Tutoria(coleccionTutorias[i]);
 			}
 		}
 		return copiaProfesor;
