@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tutorias.mvc.negocio;
+package org.iesalandalus.programacion.tutorias.mvc.modelo.negocio;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -22,14 +22,14 @@ public class Profesores {
 
 	public Profesor[] get()
 	{
-		return coleccionProfesores;
+		return copiaProfundaProfesores();
 	}
 	
 	//Clonación por copia profunda.
 	private Profesor[] copiaProfundaProfesores() 
 	{
 		Profesor[] copiaProfundaProfesores = new Profesor[capacidad];
-		for (int i = 0; i < capacidad; i++) 
+		for (int i = 0; !tamanoSuperado(i); i++) 
 		{
 			copiaProfundaProfesores[i] = new Profesor(coleccionProfesores[i]);
 		}

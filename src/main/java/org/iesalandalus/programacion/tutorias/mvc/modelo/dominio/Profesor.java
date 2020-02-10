@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo.dominio;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +10,7 @@ public class Profesor {
 	private static final String ER_DNI = "([0-9]{8})([A-Za-z])";
 	private static final String ER_CORREO = "[(\\w\\.)+|(\\w)+]+@\\w+\\.\\w{2,3}";
 	private String nombre, dni, correo;
-	
+
 	public Profesor(String nombre,String dni, String correo) 
 	{
 		super();
@@ -122,50 +123,28 @@ public class Profesor {
 	
 	public static Profesor getProfesorFicticio(String dni) 
 	{
-		Profesor profesor = new Profesor("Jaime El Poderoso", dni, "jaimeelpoderoso@ficticio.com");
-		return profesor;
+		return new Profesor("Jaime El Poderoso", dni, "jaimeelpoderoso@ficticio.com");
 	}
 
 	@Override
-	public int hashCode()
+	public int hashCode() 
 	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
-		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		return result;
+		return Objects.hash(dni);
 	}
 
 	@Override
 	public boolean equals(Object obj) 
 	{
 		if (this == obj)
+		{
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Profesor))
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Profesor other = (Profesor) obj;
-		if (correo == null)
-		{
-			if (other.correo != null)
-				return false;
-		} else if (!correo.equals(other.correo))
-			return false;
-		if (dni == null)
-		{
-			if (other.dni != null)
-				return false;
-		} else if (!dni.equals(other.dni))
-			return false;
-		if (nombre == null) 
-		{
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
+		return Objects.equals(dni, other.dni);
 	}
 
 	@Override
@@ -184,12 +163,5 @@ public class Profesor {
 		}
 		return iniciales.toUpperCase();
 	}
-
-	
-	
-
-	
-	
-	
 
 }

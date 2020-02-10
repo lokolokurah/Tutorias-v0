@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.tutorias.mvc.modelo.dominio;
 
+import java.util.Objects;
+
 public class Alumno {
 
 	private static final String ER_NOMBRE = "([a-zA-ZÁÉÍÓÚáéíóú]+)(\\s+([a-zA-ZÁÉÍÓÚáéíóú]+))+";
@@ -23,10 +25,9 @@ public class Alumno {
 		setCorreo(alumnoCopia.correo);
 		this.expediente = alumnoCopia.expediente;
 	}
-
+	
 	public static Alumno getAlumnoFicticio(String correo) {
-		Alumno alumno = new Alumno("Jaime El Poderoso", correo);
-		return alumno;
+		return new Alumno("Jaime El Poderoso", correo);
 	}
 
 	public String getNombre() {
@@ -96,40 +97,24 @@ public class Alumno {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
-		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		return result;
+	public int hashCode()
+	{
+		return Objects.hash(correo);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
+		{
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Alumno)) 
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Alumno other = (Alumno) obj;
-		if (correo == null) {
-			if (other.correo != null)
-				return false;
-		} else if (!correo.equals(other.correo))
-			return false;
-		if (expediente == null) {
-			if (other.expediente != null)
-				return false;
-		} else if (!expediente.equals(other.expediente))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
+		return Objects.equals(correo, other.correo);
 	}
 
 	@Override

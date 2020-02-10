@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class Sesion {
 
@@ -124,77 +125,42 @@ public class Sesion {
 		{
 			throw new IllegalArgumentException("ERROR: La hora de fin no es válida.");
 		}
-
 		if (horaFin.equals(horaInicio) || horaInicio.isAfter(horaFin)) 
 		{
 			throw new IllegalArgumentException("ERROR: Las hora para establecer la sesión no son válidas.");
 		}
 		//Using java.time.temporal.ChronoUnit to Find the Difference in Minutes
 		int duracionTotal = (int) ChronoUnit.MINUTES.between(horaFin, horaInicio);
-		if (duracionTotal % minutosDuracion != 0) 
+		if (duracionTotal % minutosDuracion != 0)
 		{
-			throw new IllegalArgumentException(
-					"ERROR: Los minutos de duración no es divisor de los minutos establecidos para toda la sesión.");
+			throw new IllegalArgumentException("ERROR: Los minutos de duración no es divisor de los minutos establecidos para toda la sesión.");
 		}
 	}
 
 	public static Sesion getSesionFicticia(Tutoria tutoria, LocalDate fecha) 
 	{
-		return new Sesion(tutoria, fecha, LocalTime.of(19, 00), LocalTime.of(22, 00), 30);
-	}
+		return new Sesion(tutoria, fecha, LocalTime.of(16, 00), LocalTime.of(18, 00), 15);
+	}	
 
-	
-	
 	@Override
-	public int hashCode() 
+	public int hashCode()
 	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-		result = prime * result + ((horaFin == null) ? 0 : horaFin.hashCode());
-		result = prime * result + ((horaInicio == null) ? 0 : horaInicio.hashCode());
-		result = prime * result + minutosDuracion;
-		result = prime * result + ((tutoria == null) ? 0 : tutoria.hashCode());
-		return result;
+		return Objects.hash(fecha, tutoria);
 	}
 
 	@Override
 	public boolean equals(Object obj) 
 	{
-		if (this == obj)
+		if (this == obj) 
+		{
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Sesion))
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Sesion other = (Sesion) obj;
-		if (fecha == null) 
-		{
-			if (other.fecha != null)
-				return false;
-		} else if (!fecha.equals(other.fecha))
-			return false;
-		if (horaFin == null) 
-		{
-			if (other.horaFin != null)
-				return false;
-		} else if (!horaFin.equals(other.horaFin))
-			return false;
-		if (horaInicio == null) 
-		{
-			if (other.horaInicio != null)
-				return false;
-		} else if (!horaInicio.equals(other.horaInicio))
-			return false;
-		if (minutosDuracion != other.minutosDuracion)
-			return false;
-		if (tutoria == null) 
-		{
-			if (other.tutoria != null)
-				return false;
-		} else if (!tutoria.equals(other.tutoria))
-			return false;
-		return true;
+		return Objects.equals(fecha, other.fecha) && Objects.equals(tutoria, other.tutoria);
 	}
 
 	@Override
