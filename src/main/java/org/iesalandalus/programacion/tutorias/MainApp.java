@@ -6,6 +6,9 @@ import org.iesalandalus.programacion.tutorias.mvc.vista.Vista;
 
 public class MainApp {
 	
+	/*
+	 * Author: Jaime Ruíz Ramírez
+	 */
 	public static void main(String[] args) {
 		Modelo modelo = new Modelo();
 		Vista vista = new Vista();
